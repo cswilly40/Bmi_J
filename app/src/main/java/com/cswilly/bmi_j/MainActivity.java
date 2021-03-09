@@ -9,31 +9,35 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.cswilly.bmi_j.databinding.ActivityMainBinding;
 
-    private EditText edWeight;
-    private EditText edHeight;
-    private TextView result;
+public class MainActivity extends AppCompatActivity {
+    //    private EditText edWeight;
+//    private EditText edHeight;
+//    private TextView result;
+    private ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findViews();
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+//        findViews();
     }
 
-    private void findViews() {
-        edWeight = findViewById(R.id.ed_weight);
-        edHeight = findViewById(R.id.ed_height);
+    /*private void findViews() {
+        edWeight = findViewById(R.id.weight);
+        edHeight = findViewById(R.id.height);
         result = findViewById(R.id.result);
-    }
+    }*/
 
     public void bmi(View view) {
-        float weight = Float.parseFloat(edWeight.getText().toString());
-        float height = Float.parseFloat(edHeight.getText().toString());
+        float weight = Float.parseFloat(binding.weight.getText().toString());
+        float height = Float.parseFloat(binding.height.getText().toString());
         float bmi = weight / (height * height);
         Log.d("MainActivity", "BMI: " + bmi);
         Toast.makeText(this, "Your BMI is " + bmi, Toast.LENGTH_LONG).show();
-        result.setText("Your BMI is " + bmi);
+        binding.result.setText("Your BMI is " + bmi);
     }
 }
